@@ -5,7 +5,7 @@ const Logo = () => (
   <img 
     src={logoImage} 
     alt="Logo" 
-    style={{ display: 'block', margin: '0', width: '100%', height: 'auto' }} // Adjust styles as needed
+    style={{ display: 'block', margin: '0', width: '100%', height: '50%' }} // Adjust styles as needed
   />
 );
 

@@ -9,7 +9,7 @@ body {
   justify-content: flex-start; /* Align items to the top */
   align-items: center; /* Center items horizontally */
   min-height: 100vh;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgb(0, 0, 0), rgb(0, 0, 0)); /* Gradient from black to white */
+  background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 0, 0), rgba(0, 0, 0, 0.941)); /* Gradient from black to white */
   position: relative; /* To position the clouds */
   overflow: hidden; /* Prevents overflow */
 }
@@ -22,7 +22,7 @@ body {
   width: 100%;
   height: 100%;
   background: url('https://static.vecteezy.com/system/resources/previews/049/513/630/non_2x/moody-dark-clouds-on-black-background-cut-out-transparent-png.png') repeat; /* Use a cloud image */
-  opacity: 0.3; /* Adjusted opacity for better visibility */
+  opacity: 0.49; /* Adjusted opacity for better visibility */
   animation: moveClouds 30s linear infinite; /* Animation for cloud movement */
   filter: blur(20px); /* Increased blur effect for clouds */
   z-index: 0; /* Ensure clouds are below the content */
@@ -39,28 +39,31 @@ body {
   flex-direction: column;
   align-items: center;
   max-width: 600px;
+  margin-top: 70px;
+  margin-left: 20px;
   width: 100%;
   position: relative; /* To keep content above the clouds */
   z-index: 1; /* Ensures content is above the cloud layer */
   padding-top: 20px; /* Add some padding from the top */
+  gap: 0px; 
 }
 .logo {
   margin-bottom: 0;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgb(0, 0, 0));
 }
 
-.info {
+/* .info {
   text-align: center;
   margin-bottom: 30px;
   color: #e0e0e0;
   font-size: 20px;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-}
+} */
 
 .searchWrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
 }
 
 .searchContainer {

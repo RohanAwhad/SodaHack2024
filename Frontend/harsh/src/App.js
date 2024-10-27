@@ -36,12 +36,11 @@ const HauntedDomainChecker = () => {
       {/* Add the clouds div here */}
       <div className="clouds"></div>
       <div className="content">
-        <div className="logo">
-          <Logo />
-        </div>
-        <div className="info">
-          <p>Welcome to the Haunted Domain Checker!</p>
+        <div className="logo"> <Logo />
+        <div className="mb-10 text-center text-xl text-white">
+          <p className='drop-shadow'>Welcome to the Haunted Domain Checker!</p>
           <p>Is your domain cursed? Find out now!</p>
+        </div>
         </div>
         <div className="searchWrapper">
           <form onSubmit={handleSubmit} className={`searchContainer ${isFocused ? 'focused' : ''}`}>
