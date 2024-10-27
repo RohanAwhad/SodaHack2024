@@ -54,7 +54,7 @@ const HauntedDomainChecker = () => {
           status: availability.available ? 'Available' : 'Unavailable',
           haunted_illegal: illegalActivity.illegal_activity ? 'Yes' : 'No',
           offering: offering.use_case.join(', '),
-          description: `Description for ${extractedDomain}`, // Customize as needed
+          description: illegalActivity.details, // Customize as needed
         }];
 
         setSearchResult([{ name: productName, domains: domainDetails }]);
@@ -80,7 +80,7 @@ const HauntedDomainChecker = () => {
               status: availability.available ? 'Available' : 'Unavailable',
               haunted_illegal: illegalActivity.illegal_activity ? 'Yes' : 'No',
               offering: offering.use_case.join(', '),
-              description: `Description for ${domain.domain_name}`, // Customize as needed
+              description: illegalActivity.details, // Customize as needed
             };
           }));
           return {

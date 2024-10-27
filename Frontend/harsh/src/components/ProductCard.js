@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const ProductCard = ({ productInfo }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -26,10 +27,28 @@ const ProductCard = ({ productInfo }) => {
                     <div className="collapse-title text-xl font-medium">{domain.name}</div>
                     <div className="collapse-content">
                         <div className="mt-2 ml-4">
-                            <p><strong>Status:</strong> {domain.status}</p>
-                            <p><strong>Haunted/Illegal:</strong> {domain.haunted_illegal}</p>
-                            <p><strong>Offering:</strong> {domain.offering}</p>
-                            <p><strong>Description:</strong> {domain.description}</p>
+                          <div className="p-4">
+                            <p className="font-bold mb-2">Status: <span className="text-primary">{domain.status}</span></p>
+                            <p className="font-bold mb-2">Haunted/Illegal: <span className="text-error">{domain.haunted_illegal}</span></p>
+
+                            <div className="mb-2 max-w-md">
+                              <p className="font-bold">Offering:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {domain.offering.split(',').map((offering: string, index: number) => (
+                                  <span key={index} className="badge badge-outline badge-primary">{offering.trim()}</span>
+                                ))}
+                              </div>
+                            </div>
+
+
+
+                            <div>
+                              <p className="font-bold mb-2">Description:</p>
+                              <div className="prose max-w-md">
+                                <ReactMarkdown>{domain.description}</ReactMarkdown>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
