@@ -45,7 +45,7 @@ body {
   padding-top: 20px; /* Add some padding from the top */
 }
 .logo {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
