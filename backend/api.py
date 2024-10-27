@@ -32,6 +32,7 @@ class DomainNameResponse(BaseModel):
 
 class DomainResearchRequest(BaseModel):
     domain_name: str
+    need_detailed_report: bool = True
 
 class IllegalActivityResponse(BaseModel):
     illegal_activity: bool
@@ -80,7 +81,7 @@ async def suggest_domain_names(request: DomainNameRequest):
 
 @app.post("/domain-research/illegal-activity", response_model=IllegalActivityResponse)
 async def check_illegal_activity(request: DomainResearchRequest):
-    return main.research_for_illegal_activities(request.domain_name)
+    return main.research_for_illegal_activities(request.domain_name, request.need_detailed_report)
 
 @app.post("/domain-research/offering", response_model=DomainOfferingResponse)
 async def check_domain_offering(request: DomainResearchRequest):
