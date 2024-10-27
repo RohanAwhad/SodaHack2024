@@ -1,15 +1,10 @@
 body {
   margin: 0;
-  overflow: hidden; /* Prevents scrollbars from appearing */
 }
-
-
-
 
 @keyframes moveClouds {
   0% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-
 }
 
 .content {
@@ -18,36 +13,26 @@ body {
   align-items: center;
   max-width: 800px;
   margin-top: 70px;
-  margin-left: 20px;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
-  position: relative; /* To keep content above the clouds */
-  z-index: 1; /* Ensures content is above the cloud layer */
-  padding-top: 20px; /* Add some padding from the top */
-  gap: 0px; 
+  position: relative;
+  z-index: 1;
 }
+
 .logo {
   margin-bottom: 0;
   filter: drop-shadow(0 0 10px rgb(0, 0, 0));
 }
 
-/* .info {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #e0e0e0;
-  font-size: 20px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-} */
-
 .searchWrapper {
   position: relative;
   width: 100%;
-  max-width: 800px;
 }
 
 .searchContainer {
   position: relative;
   width: 100%;
-  transition: transform 0.3s ease;
 }
 
 .input {
@@ -55,51 +40,49 @@ body {
   padding: 15px 50px 15px 20px;
   font-size: 18px;
   color: #e0e0e0;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255,255,255,0.1);
   border: 2px solid #4a4a4a;
   border-radius: 25px;
-  outline: none;
-  transition: all 0.3s ease;
 }
 
 .input::placeholder {
-  color: rgba(224, 224, 224, 0.7);
+   color: rgba(224,224,224,0.7);
 }
 
 .iconContainer {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #e0e0e0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
+   position: absolute; 
+   right: 15px; 
+   top: 50%; 
+   transform: translateY(-50%);
+   color: #e0e0e0; 
+   background: none; 
+   border: none; 
+   cursor: pointer; 
+   padding: 5px; 
 }
 
 .glow {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #4a4a4a, #e0e0e0);
-  filter: blur(20px);
-  border-radius: 28px;
-  z-index: -1;
-  opacity: 0.3;
-  animation: hauntedPulse 3s infinite;
+   position: absolute; 
+   top: -2px; 
+   left: -2px; 
+   right: -2px; 
+   bottom: -2px; 
+   background: linear-gradient(45deg,#4a4a4a,#e0e0e0); 
+   filter: blur(20px); 
+   border-radius: 28px; 
+   z-index: -1; 
+   opacity: .3; 
+   animation: hauntedPulse 3s infinite; 
 }
 
 @keyframes hauntedPulse {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 0.2;
-  }
+   from {opacity: .2;}
+   to {opacity: .4;}
+}
+
+.results-container {
+   display: flex; 
+   flex-direction: column; 
+   gap: 1rem; 
+   margin-top: 2rem; 
 }

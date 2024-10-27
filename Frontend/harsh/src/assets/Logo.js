@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from './faith.png'; // Adjust the path to your logo image
+import logoImage from './faith1.png'; // Adjust the path to your logo image
 
 const Logo = () => (
   <img 
