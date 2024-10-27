@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Return true here to indicate that we will send the response asynchronously
     (async function() {
       try {
-        const response = await fetch('http://localhost:8081/api/v1/domain-research/illegal-activity', {
+        const response = await fetch('https://faith.rohanawhad.com/api/v1/domain-research/illegal-activity', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
