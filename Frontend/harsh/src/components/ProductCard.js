@@ -31,7 +31,7 @@ const ProductCard = ({ productInfo }) => {
                             <p className="font-bold mb-2">Status: <span className="text-primary">{domain.status}</span></p>
                             <p className="font-bold mb-2">Haunted/Illegal: <span className="text-error">{domain.haunted_illegal}</span></p>
 
-                            <div className="mb-2 max-w-md">
+                            <div className="mb-2 max-w-3xl">
                               <p className="font-bold">Offering:</p>
                               <div className="flex flex-wrap gap-2">
                                 {domain.offering.split(',').map((offering: string, index: number) => (

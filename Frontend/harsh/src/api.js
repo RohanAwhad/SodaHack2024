@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an instance of axios with a base URL
 const api = axios.create({
-  baseURL: 'http://localhost:8081/api/v1',  // Replace this with the actual base URL of your API
+  baseURL: '/api/v1',  // Replace this with the actual base URL of your API
 });
 
 // Function to suggest product names based on product description
