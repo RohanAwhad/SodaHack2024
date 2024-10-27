@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Domain Availability Checker",
+  "version": "1.0",
+  "description": "Checks the availability of domains on a webpage when triggered by a popup button.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "http://localhost:8081/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "32": "32w.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],  
+      "js": ["content.js"],    
+      "run_at": "document_idle"
+    }
+  ]
+}
