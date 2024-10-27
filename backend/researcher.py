@@ -3,6 +3,7 @@ import json
 import os
 import requests
 import time
+import functools
 from typing import List, Dict, Any, Tuple
 
 
@@ -230,6 +231,8 @@ def ask_llm(messages: List[Dict[str, str]], tools: List[Dict[str, Any]] = None, 
     )
     return response.choices[0].message, response.usage
 
+
+@functools.lru_cache(maxsize=1024)
 def process_user_query(query: str) -> str:
     """
     Process the user's query and return a response.

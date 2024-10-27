@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+import main
 
 app = FastAPI(root_path='/api/v1')
 
@@ -28,7 +29,7 @@ class IllegalActivityResponse(BaseModel):
 
 class DomainOfferingResponse(BaseModel):
     domain_name: str
-    use_case: str
+    use_case: list[str]
 
 class DomainAvailabilityRequest(BaseModel):
     domain_name: str
@@ -59,46 +60,22 @@ domain_research = {
 
 @app.post("/product-names", response_model=List[ProductNameResponse])
 async def suggest_product_names(request: ProductNameRequest):
-    # Logic to generate product names based on the description
-    # Here we're just returning some dummy data
-    response = [{"product_name": name} for name in product_name_suggestions[:10]]
-    return response
+    return [{'product_name': x} for x in main.get_product_names(request.description)]
 
 @app.post("/domain-names", response_model=List[DomainNameResponse])
 async def suggest_domain_names(request: DomainNameRequest):
-    # Logic to generate domain names based on the product name
-    # Dummy data for the response
-    response = domain_name_suggestions[:10]
-    return response
+    domain_names = main.get_domain_names(request.product_name)
+    ret = [dict(domain_name=x, available=main.is_domain_available_for_purchase(x)) for x in domain_names]
+    return ret
 
 @app.post("/domain-research/illegal-activity", response_model=IllegalActivityResponse)
 async def check_illegal_activity(request: DomainResearchRequest):
-    # Check for illegal activity related to the domain name
-    domain_data = domain_research.get(request.domain_name)
-    if domain_data:
-        return IllegalActivityResponse(
-            illegal_activity=domain_data["illegal_activity"],
-            details=domain_data.get("details")
-        )
-    raise HTTPException(status_code=404, detail="Domain not found")
+    return main.research_for_illegal_activities(request.domain_name)
 
-@app.post("/domain-research/offering", response_model=List[DomainOfferingResponse])
+@app.post("/domain-research/offering", response_model=DomainOfferingResponse)
 async def check_domain_offering(request: DomainResearchRequest):
-    # Get the previous offerings for the domain
-    domain_data = domain_research.get(request.domain_name)
-    if domain_data:
-        return [
-            DomainOfferingResponse(
-                domain_name=request.domain_name,
-                use_case=domain_data["use_case"]
-            )
-        ]
-    raise HTTPException(status_code=404, detail="Domain not found")
+    return main.research_for_product_offerings(request.domain_name)
 
 @app.post("/domain-availability", response_model=DomainAvailabilityResponse)
 async def check_domain_availability(request: DomainAvailabilityRequest):
-    # Check if the domain is available
-    for domain in domain_name_suggestions:
-        if domain["domain_name"] == request.domain_name:
-            return DomainAvailabilityResponse(available=domain["available"])
-    raise HTTPException(status_code=404, detail="Domain not found")
+    return DomainAvailabilityResponse(available=main.is_domain_available_for_purchase(request.domain_name))
