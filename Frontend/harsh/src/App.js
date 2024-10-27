@@ -32,11 +32,14 @@ const HauntedDomainChecker = () => {
   };
 
   return (
-    <div className="container">
+    <div className=' bg-gradient-to-t from-black to-black opacity-95'>
+    <div className="container pt-5 mx-auto max-w-6xl min-h-screen justify-items-center">
       {/* Add the clouds div here */}
-      <div className="clouds"></div>
+      {/* <div className="clouds"></div> */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://static.vecteezy.com/system/resources/previews/049/513/630/non_2x/moody-dark-clouds-on-black-background-cut-out-transparent-png.png')] bg-repeat opacity-[0.49] filter blur-[20px] z-0 animate-[moveClouds_30s_linear_infinite]">
+</div>
       <div className="content">
-        <div className="logo"> <Logo />
+        <div className="logo max-w-2xl"> <Logo />
         <div className="mb-10 text-center text-xl text-white">
           <p className='drop-shadow'>Welcome to the Haunted Domain Checker!</p>
           <p>Is your domain cursed? Find out now!</p>
@@ -61,6 +64,7 @@ const HauntedDomainChecker = () => {
           {isFocused && <div className="glow" />}
         </div>
       </div>
+    </div>
     </div>
   );
 };
