@@ -86,7 +86,7 @@ const HauntedDomainChecker = () => {
                     title={key.replace(/-/g, ' ').replace(/\//, ' - ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} 
                     data={value} 
                   />
-                  <div className="glow absolute -inset-0.5 opacity-30 rounded-lg z-0"></div>
+                  <div className="-inset-0.5 opacity-30 rounded-lg z-0"></div>
                 </div>
               ))}
             </div>
