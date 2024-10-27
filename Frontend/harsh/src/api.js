@@ -21,6 +21,7 @@ export async function suggestProductNames(description) {
     return response.data;  // Array of objects with product_name property
   } catch (error) {
     console.error('Error suggesting product names:', error.response?.data || error.message);
+    return [];  // Return an empty array in case of error
   }
 }
 
@@ -40,6 +41,7 @@ export async function suggestDomainNames(productName) {
     return response.data;  // Array of objects with domain_name and available properties
   } catch (error) {
     console.error('Error suggesting domain names:', error.response?.data || error.message);
+    return [];  // Return an empty array in case of error
   }
 }
 
@@ -53,12 +55,13 @@ export async function suggestDomainNames(productName) {
 export async function checkIllegalActivity(domainName) {
   try {
     const response = await api.post('/domain-research/illegal-activity', {
-      domain_name: domainName
+      domain_name: domainName, need_detailed_report: false
     });
     console.log('Illegal Activity Check:', response.data);
     return response.data;  // Object with illegal_activity boolean and optional details string
   } catch (error) {
     console.error('Error checking illegal activity:', error.response?.data || error.message);
+    return { illegal_activity: false };  // Return false in case of error
   }
 }
 
@@ -75,9 +78,10 @@ export async function checkDomainOffering(domainName) {
       domain_name: domainName
     });
     console.log('Domain Offerings:', response.data);
-    return response.data;  // Array of objects with domain_name and use_case properties
+    return response.data;  // Object with domain_name and use_case properties
   } catch (error) {
     console.error('Error checking domain offerings:', error.response?.data || error.message);
+    return { domain_name: domainName, use_case: [] };  // Return empty use_case list in case of error
   }
 }
 
@@ -97,5 +101,6 @@ export async function checkDomainAvailability(domainName) {
     return response.data;  // Object with available boolean
   } catch (error) {
     console.error('Error checking domain availability:', error.response?.data || error.message);
+    return { available: false };  // Return false in case of error
   }
 }
