@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Domain Availability Checker",
+  "name": "Faith",
   "version": "1.0",
-  "description": "Checks the availability of domains on a webpage when triggered by a popup button.",
+  "description": "Unmasking the haunted histories of domains so you don’t get spooked online.",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
     "http://localhost:8081/*"
