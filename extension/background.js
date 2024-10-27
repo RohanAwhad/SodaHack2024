@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ domain_name: message.domain_name })
+          body: JSON.stringify({ domain_name: message.domain_name, need_detailed_report: false })
         });
 
         if (!response.ok) {

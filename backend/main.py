@@ -30,8 +30,10 @@ def get_domain_names(product_name: str) -> list[str]:
   return ret.domains_list
 
 # Define the research function
-def research_for_illegal_activities(domain: str) -> dict[str, str | bool]:
-  illegal_activity_research = researcher.process_user_query(f"was {domain} ever been involved in illegal activities?")
+def research_for_illegal_activities(domain: str, need_detailed_report: bool) -> dict[str, str | bool]:
+  query = f"was {domain} ever been involved in illegal activities?"
+  if not need_detailed_report: query += ' answer in 3-4 lines'
+  illegal_activity_research = researcher.process_user_query(query)
 
   messages = [Message('user', illegal_activity_research[0])] 
   ret: IsIllegalActivity = structured_llm_output.run('gpt-4o-mini', messages, max_retries=3, response_model=IsIllegalActivity)
