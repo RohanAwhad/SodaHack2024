@@ -9,4 +9,7 @@ document.getElementById("check-domains").addEventListener("click", async () => {
         target: { tabId: tab.id },
         files: ["content.js"]
     });
+
+    // diable the button
+    document.getElementById("check-domains").disabled = true;
 });
