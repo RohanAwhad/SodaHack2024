@@ -1,3 +1,22 @@
+async function checkIllegalActivity(domainName) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: 'checkIllegalActivity', domain_name: domainName }, (response) => {
+      console.log(response)
+      if (response) {
+        if (response.success) {
+          resolve(response.data);
+        } else {
+          reject(response.error);
+        }
+      } else {
+       reject('undefined response');
+      }
+    });
+  });
+}
+
+
+
 window.addEventListener('load', () => {
   console.log('content.js loaded');
   console.log('Page fully loaded2!');
@@ -14,44 +33,45 @@ window.addEventListener('load', () => {
 
     for (let i = 0; i < domainElements.length; i++) {
       const domain_name = domainElements[i].innerText.trim();
-      console.log(domain_name);
 
-      let status = 'haunted';
-
-      const availabilityText = document.createElement('span');
-      availabilityText.style.borderRadius = '50px';
-      availabilityText.style.padding = '6px 9px';
-      availabilityText.style.marginLeft = '5px';
-      availabilityText.style.fontSize = '18px';
-      availabilityText.style.color = 'white';
-      availabilityText.style.cursor = 'pointer';
-      availabilityText.style.cursor = 'pointer';
-
-      if (i % 2 === 0) {
-        console.log('haunted');
-        availabilityText.textContent = 'Haunted';
-        availabilityText.style.background = '#f46565';
-      } else {
-        console.log('safe');
-        status = 'safe';
-        availabilityText.textContent = 'Safe';
-        availabilityText.style.background = '#63c14a';
-      }
-
-      availabilityText.addEventListener('click', (event) => {
-        event.stopPropagation();
-
-        data = {
-          "domain_name": domain_name,
-          "status": status,
-          "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      // get illegal activity and deatils
+      try{
+        const { illegal_activity, details } = await checkIllegalActivity(domain_name);
+        let status, status_color
+        if (illegal_activity) {
+          status = 'Haunted';
+          status_color = '#f46565'
+        } else {
+          status = 'Safe';
+          status_color = '#63c14a'
         }
 
-      console.log(data);
-        createPopup(data);
-      });
+        const availabilityText = document.createElement('span');
+        availabilityText.style.borderRadius = '50px';
+        availabilityText.style.padding = '6px 9px';
+        availabilityText.style.marginLeft = '5px';
+        availabilityText.style.fontSize = '18px';
+        availabilityText.style.color = 'white';
+        availabilityText.style.cursor = 'pointer';
+        availabilityText.style.cursor = 'pointer';
+        console.log(status);
+        availabilityText.textContent = status;
+        availabilityText.style.background = status_color;
 
-      domainElements[i].appendChild(availabilityText);
+        availabilityText.addEventListener('click', (event) => {
+          event.stopPropagation();
+          data = {
+            "domain_name": domain_name,
+            "status": status,
+            "details": details
+          }
+        console.log(data);
+          createPopup(data);
+        });
+        domainElements[i].appendChild(availabilityText);
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -86,7 +106,7 @@ function createPopup(content) {
   oneLinerHeading.style.fontWeight = 'bold';
   oneLinerHeading.style.lineHeight = '1';
 
-  if (content['status'] === 'haunted') {
+  if (content['status'] === 'Haunted') {
     oneLinerHeading.style.color = '#f46565';
     oneLinerHeading.textContent = "Beware! This domain is spookier than a graveyard at midnight!";
   } else {
@@ -130,3 +150,6 @@ function createPopup(content) {
 async function checkDomainAvailability(domain) {
   return true;
 }
+
+
+
