@@ -1,6 +1,8 @@
 # Domain Verifier
 Verify if the domain you want to buy is Haunted or not?
 
+https://github.com/user-attachments/assets/a03334c8-016e-4a9f-8e77-f7d02651aaa3
+
 ## How to Run:
 
 #### Environment Variables
